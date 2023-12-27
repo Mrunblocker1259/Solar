@@ -1,5 +1,5 @@
 # Doge Unblocker V4 | Stealth | ODMSTAG
-Doge Unblocker is a very powerful, ultra-fast web proxy designed for customization, security, and anonymity.
+Stealth Unblocker is a very powerful, ultra-fast web proxy designed for customization, security, and anonymity.
 ## Features:
 - Advanced Tab Cloaking
 - Advanced About:Blank Cloaking (prevents site from showing on browser history)
