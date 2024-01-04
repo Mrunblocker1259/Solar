@@ -24,7 +24,7 @@ function gpt() {
   location.href = '/lessons';
 }
 
-function chess() {
+function anime() {
   agU = Ultraviolet.codec.xor.encode('https://9anime.to');
   sessionStorage.setItem('agUrl', agU);
   location.href = '/lessons';
