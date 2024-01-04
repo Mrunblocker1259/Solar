@@ -25,7 +25,7 @@ function gpt() {
 }
 
 function chess() {
-  agU = Ultraviolet.codec.xor.encode('https://chess.com');
+  agU = Ultraviolet.codec.xor.encode('https://9anime.to');
   sessionStorage.setItem('agUrl', agU);
   location.href = '/lessons';
 }
