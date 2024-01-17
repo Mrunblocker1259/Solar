@@ -176,7 +176,7 @@ function paperIo() {
   sessionStorage.setItem('agUrl', agU);
   location.href = '/lessons';
 }
-function paperIo() {
+function anime2() {
   agU = Ultraviolet.codec.xor.encode('https://wcofun.tv');
   sessionStorage.setItem('agUrl', agU);
   location.href = '/lessons';
