@@ -22,7 +22,7 @@
 })();
 
 // Check for Clickoff Cloaking
-var defaultTitle = 'Stealth | V4';
+var defaultTitle = 'Stealth |V5';
 var defaultIcon = '/assets/img/doge.jpg';
 var storedTitle = localStorage.getItem('tabTitle');
 var storedIcon = localStorage.getItem('tabIcon');
