@@ -28,5 +28,5 @@ window.navigator.serviceWorker.register("/sw.js", {
 
 /*apps*/
 function gpt() {
-  openAg('https://ub7.org');
+  openAg('https://coolmathgames.com');
 }
