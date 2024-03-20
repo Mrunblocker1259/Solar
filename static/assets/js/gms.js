@@ -51,7 +51,7 @@ function addGms(name, imageUrl, onClickFunction, width, height) {
 }
 
 var gms = {
-    'Intersteller': { imageUrl: "/assets/img/geforcenow.webp", onClick: Interseller Gamehub},
+    'test': { imageUrl: "/assets/img/canvas.png", onClick: test },
 }; 
 for (var gmsName in gms) {
     if (gms.hasOwnProperty(gmsName)) {
