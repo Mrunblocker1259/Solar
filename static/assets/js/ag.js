@@ -1,267 +1,32 @@
-Skip to content
-ODMSTAG
-/
-Stealth-gamehub
+/*function youtube() {
+  let URL = 'https://www.youtube.com/';
+  let urlToInject = window.location.origin + __uv$config.prefix + __uv$config.encodeUrl(URL);
+  const newWindow = window.open();
+  const iframe = newWindow.document.createElement('iframe');
+  newWindow.document.body.style.margin = '0';
+  iframe.style.width = '100%';
+  iframe.style.height = '100%';
+  iframe.style.position = 'fixed';
+  iframe.style.top = '0';
+  iframe.style.left = '0';
+  iframe.style.zIndex = '99999';
+  iframe.style.border = 'none';
+  newWindow.document.body.style.overflow = 'hidden';
+  newWindow.document.body.appendChild(iframe);
+  iframe.src = urlToInject;
+}*/
 
-Type / to search
-
-Code
-Pull requests
-Actions
-Projects
-Security
-Insights
-Settings
-Files
-Go to file
-t
-static
-assets
-css
-fonts
-img
-js
-ag.js
-cloakcheck.js
-clock.js
-error.js
-functions.js
-index.js
-leaveConfirmation.js
-login.js
-mobile.js
-particles.js
-script.js
-search.js
-settings.js
-showlogin.js
-sw.js
-Kalimba.mp3
-uv
-uv.bundle.js
-uv.config.js
-uv.config.js.js
-uv.handler.js
-uv.sw.js
-404.html
-agloader.html
-android-chrome-192x192.png
-android-chrome-512x512.png
-app.html
-apple-touch-icon.png
-apps.html
-credits.html
-favicon-16x16.png
-favicon-32x32.png
-favicon.ico
-gms.html
-index.html
-loader.html
-loading.html
-mobile.html
-settings.html
-site.webmanifest
-sw.js
-.gitignore
-Dockerfile
-LICENSE
-README.md
-index.js
-package.json
-render.yaml
-vercel.json
-Editing ag.js in Stealth-gamehub
-BreadcrumbsStealth-gamehub/static/assets/js
-/
-ag.js
-in
-main
-
-Edit
-
-Preview
- @@ -1,1774 +0,0 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const appsList = [
-    {
-      name: '! Request A Game',
-      link: 'https://forms.gle/vhNiKzsnMHYPmCL1A',
-      image: '/assets/media/icons/request.webp',
-      categories: ['all'],
-    },
-    {
-      name: 'Amazon Luna',
-      link: 'https://luna.amazon.com/',
-      image: '/assets/media/icons/amazon-luna.webp',
-      categories: ['all'],
-      blank: 'true',
-    },
-
-  ]
-
-  appsList.sort((a, b) => a.name.localeCompare(b.name))
-
-  const nonPinnedApps = document.querySelector('.container-apps')
-  const pinnedApps = document.querySelector('.pinned-apps')
-  var pinList = localStorage.getItem('pinnedGames')
-  try {
-    pinList = pinList.split(',').map(Number)
-  } catch {}
-  var appInd = 0
-  appsList.forEach((app) => {
-    let pinNum = appInd
-    const columnDiv = document.createElement('div')
-    columnDiv.classList.add('column')
-    columnDiv.setAttribute('data-category', app.categories.join(' '))
-
-    const pinIcon = document.createElement('i')
-    pinIcon.classList.add('fa')
-    pinIcon.classList.add('fa-map-pin')
-    pinIcon.ariaHidden = true
-
-    const btn = document.createElement('button')
-    btn.appendChild(pinIcon)
-    btn.style.float = 'right'
-    btn.style.backgroundColor = 'rgb(45,45,45)'
-    btn.style.borderRadius = '50%'
-    btn.style.borderColor = 'transparent'
-    btn.style.color = 'white'
-    btn.style.top = '-200px'
-    btn.style.position = 'relative'
-    btn.onclick = function () {
-      setPin(pinNum)
-    }
-    btn.title = 'Pin'
-
-    const link = document.createElement('a')
-
-    function saveToLocal(path) {
-      sessionStorage.setItem('GoUrl', path)
-    }
-
-    function handleClick(app) {
-      if (typeof app.say !== 'undefined') {
-        alert(app.say)
-      }
-
-      if (app.local) {
-        saveToLocal(app.link)
-        window.location.href = '&'
-      } else if (app.local2) {
-        saveToLocal(app.link)
-        window.location.href = app.link
-      } else if (app.blank) {
-        blank(app.link)
-      } else if (app.now) {
-        now(app.link)
-      } else {
-        go(app.link)
-      }
-
-      return false
-    }
-
-    link.onclick = function () {
-      handleClick(app)
-    }
-
-    const image = document.createElement('img')
-    image.width = 145
-    image.height = 145
-    image.src = app.image
-    image.loading = 'lazy'
-
-    const paragraph = document.createElement('p')
-    paragraph.textContent = app.name
-    if (app.error) {
-      paragraph.style.color = 'red'
-    }
-
-    link.appendChild(image)
-    link.appendChild(paragraph)
-    columnDiv.appendChild(link)
-    if (appInd != 0) {
-      columnDiv.appendChild(btn)
-    }
-
-    if (pinList != null && appInd != 0) {
-      if (pinContains(appInd, pinList)) {
-        pinnedApps.appendChild(columnDiv)
-      } else {
-        nonPinnedApps.appendChild(columnDiv)
-      }
-    } else {
-      nonPinnedApps.appendChild(columnDiv)
-    }
-    appInd++
-  })
-  appsContainer.appendChild(pinnedApps)
-  appsContainer.appendChild(nonPinnedApps)
-})
-function setPin(index) {
-  pins = localStorage.getItem('pinnedGames')
-  if (pins == null) {
-    pins = []
-  }
-  if (pins == '') {
-    pins = []
-  } else {
-    pins = pins.split(',').map(Number)
-  }
-  if (pinContains(index, pins)) {
-    let remove = pins.indexOf(index)
-
-    pins.splice(remove, 1)
-  } else {
-    pins.push(index)
-  }
-  localStorage.setItem('pinnedGames', pins)
-  location.reload()
-}
-function pinContains(i, p) {
-  if (p == '') {
-    return false
-  }
-  for (var x = 0; x < p.length; x++) {
-    if (p[x] === i) {
-      return true
-    }
-  }
-  return false
+function openAg(url) {
+  agU = Ultraviolet.codec.xor.encode(url);
+  localStorage.setItem('agUrl', agU);
+  location.href = '/lessons';
 }
 
-function show_category() {
-  var selectedCategories = Array.from(document.querySelectorAll('#category option:checked')).map(
-    (option) => option.value
-  )
-  var games = document.getElementsByClassName('column')
+window.navigator.serviceWorker.register("/sw.js", {
+  scope: __uv$config.prefix,
+});
 
-  for (var i = 0; i < games.length; i++) {
-    var game = games[i]
-    var categories = game.getAttribute('data-category').split(' ')
-
-    if (selectedCategories.length === 0 || selectedCategories.some((category) => categories.includes(category))) {
-      game.style.display = 'block'
-    } else {
-      game.style.display = 'none'
-    }
-  }
+/*apps*/
+function gpt() {
+  openAg('https://ub7.org');
 }
-
-function search_bar() {
-  var input = document.getElementById('searchbarbottom')
-  var filter = input.value.toLowerCase()
-  var games = document.getElementsByClassName('column')
-
-  for (var i = 0; i < games.length; i++) {
-    var game = games[i]
-    var name = game.getElementsByTagName('p')[0].textContent.toLowerCase()
-
-    if (name.includes(filter)) {
-      game.style.display = 'block'
-    } else {
-      game.style.display = 'none'
-    }
-  }
-}
-ODMSTAG Owns this repository Press escape to close this hovercard 
