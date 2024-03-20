@@ -51,7 +51,8 @@ function addGms(name, imageUrl, onClickFunction, width, height) {
 }
 
 var gms = {
-    'test': { imageUrl: "/assets/img/canvas.png", onClick: test },
+    'GeForce Now': { imageUrl: "/assets/img/geforcenow.webp", onClick: geforce },
+ 
 }; 
 for (var gmsName in gms) {
     if (gms.hasOwnProperty(gmsName)) {
